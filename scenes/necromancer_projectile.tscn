@@ -1,0 +1,105 @@
+[gd_scene load_steps=14 format=3 uid="uid://cxoi0pn3bwg62"]
+
+[ext_resource type="Script" path="res://scripts/necromancer_projectile.gd" id="1_1mlqx"]
+[ext_resource type="Texture2D" uid="uid://cajp3xpc631su" path="res://assets/necro/skull3.png" id="2_b1de6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6vkyo"]
+atlas = ExtResource("2_b1de6")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sp0jy"]
+atlas = ExtResource("2_b1de6")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nqndg"]
+atlas = ExtResource("2_b1de6")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_huow0"]
+atlas = ExtResource("2_b1de6")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w24a6"]
+atlas = ExtResource("2_b1de6")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qdhhg"]
+atlas = ExtResource("2_b1de6")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fngvj"]
+atlas = ExtResource("2_b1de6")
+region = Rect2(320, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ffs24"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6vkyo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sp0jy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nqndg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_huow0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w24a6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qdhhg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fngvj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="GDScript" id="GDScript_biyg1"]
+script/source = "extends Hitbox
+"
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_587ur"]
+radius = 5.0
+height = 12.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lvoyh"]
+radius = 5.09902
+
+[node name="necromancer_projectile" type="Area2D"]
+y_sort_enabled = true
+collision_layer = 0
+collision_mask = 131
+script = ExtResource("1_1mlqx")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ffs24")
+autoplay = "default"
+frame_progress = 0.243427
+
+[node name="Hitbox" type="Area2D" parent="AnimatedSprite2D" node_paths=PackedStringArray("hitbox_owner")]
+collision_layer = 8
+collision_mask = 0
+script = SubResource("GDScript_biyg1")
+damage_power = 40.0
+knockback_power = 30.0
+hitbox_owner = NodePath("../..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/Hitbox"]
+shape = SubResource("CapsuleShape2D_587ur")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_lvoyh")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, -3)
+scale = Vector2(0.7, 0.9)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

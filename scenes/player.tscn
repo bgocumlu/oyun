@@ -1,0 +1,806 @@
+[gd_scene load_steps=40 format=3 uid="uid://515jmteaaq77"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_80dj5"]
+[ext_resource type="Texture2D" uid="uid://bwntdoste31uh" path="res://assets/player2/newcombined.png" id="2_en3d1"]
+[ext_resource type="Script" path="res://scripts/hitbox.gd" id="3_fl1gd"]
+[ext_resource type="Script" path="res://scripts/dash.gd" id="5_tn2bh"]
+[ext_resource type="PackedScene" uid="uid://dvkv3umthfoj3" path="res://scenes/laser.tscn" id="6_ym5cx"]
+[ext_resource type="Texture2D" uid="uid://bmg47gpfidm0f" path="res://assets/Dark VFX 2/Dark VFX 2 (48x64).png" id="7_br7r5"]
+[ext_resource type="Texture2D" uid="uid://cp2koaopkgvmb" path="res://assets/healing/h.png" id="7_dxgfr"]
+[ext_resource type="PackedScene" uid="uid://c2ruf735lsivq" path="res://scenes/healthbar.tscn" id="7_rnfd2"]
+[ext_resource type="Texture2D" uid="uid://xihklsi0hmom" path="res://assets/healing/m2.png" id="8_hfiri"]
+[ext_resource type="Texture2D" uid="uid://36h5pgkar2cx" path="res://assets/vfx2/466.png" id="8_vpgya"]
+[ext_resource type="Texture2D" uid="uid://bmr7mh0plue81" path="res://assets/Keys/F-Key.png" id="9_ds3hg"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vkf8w"]
+radius = 9.0
+height = 28.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nsqgr"]
+radius = 3.0
+height = 10.0
+
+[sub_resource type="Animation" id="Animation_gyn2p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [72]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/Hitbox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D/Hitbox/CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -18)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D/Hitbox/CollisionShape2D:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5708]
+}
+
+[sub_resource type="Animation" id="Animation_0acgw"]
+resource_name = "attack_back"
+length = 0.428579
+step = 0.0714286
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0714286, 0.142857, 0.214286, 0.285714, 0.357143, 0.428571),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/Hitbox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0714286, 0.214286),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D/Hitbox/CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -18)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D/Hitbox/CollisionShape2D:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5708]
+}
+
+[sub_resource type="Animation" id="Animation_3q4ih"]
+resource_name = "attack_front"
+length = 0.428579
+step = 0.0714286
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0714286, 0.142857, 0.214286, 0.285714, 0.357143, 0.428571),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [48, 49, 50, 51, 52, 53, 54]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/Hitbox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0714286, 0.214286),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D/Hitbox/CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 7)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D/Hitbox/CollisionShape2D:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5708]
+}
+
+[sub_resource type="Animation" id="Animation_jg3sv"]
+resource_name = "attack_side"
+length = 0.428579
+step = 0.0714286
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0714286, 0.142857, 0.214286, 0.285714, 0.357143, 0.428571),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [96, 97, 98, 99, 100, 101, 102]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/Hitbox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0714286, 0.214286),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D/Hitbox/CollisionShape2D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5708]
+}
+
+[sub_resource type="Animation" id="Animation_v63j7"]
+resource_name = "big_attack_back"
+length = 0.428579
+step = 0.0714286
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0714286, 0.142857, 0.214286, 0.285714, 0.357143),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [168, 169, 170, 171, 172, 173]
+}
+
+[sub_resource type="Animation" id="Animation_kvj3q"]
+resource_name = "big_attack_front"
+length = 0.428579
+step = 0.0714286
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0714286, 0.142857, 0.214286, 0.285714, 0.357143, 0.428579),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [156, 157, 158, 159, 160, 161, 161]
+}
+
+[sub_resource type="Animation" id="Animation_dcf5e"]
+resource_name = "big_attack_side"
+length = 0.500007
+step = 0.0714286
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0714286, 0.142857, 0.214286, 0.285714, 0.357143, 0.428572),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [180, 181, 182, 183, 184, 185, 186]
+}
+
+[sub_resource type="Animation" id="Animation_eogu2"]
+resource_name = "death"
+length = 0.80001
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [144, 145, 146, 147, 148, 149, 150, 151]
+}
+
+[sub_resource type="Animation" id="Animation_uhrnu"]
+resource_name = "hit_back"
+length = 0.40001
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [12, 13, 14, 15]
+}
+
+[sub_resource type="Animation" id="Animation_t6ndl"]
+resource_name = "hit_front"
+length = 0.40001
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [60, 61, 62, 63]
+}
+
+[sub_resource type="Animation" id="Animation_ula07"]
+resource_name = "hit_side"
+length = 0.40001
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [108, 109, 110, 111]
+}
+
+[sub_resource type="Animation" id="Animation_vtvqd"]
+resource_name = "idle_back"
+length = 2.40002
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35]
+}
+
+[sub_resource type="Animation" id="Animation_8c6aj"]
+resource_name = "idle_front"
+length = 2.40002
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83]
+}
+
+[sub_resource type="Animation" id="Animation_bal1y"]
+resource_name = "idle_side"
+length = 2.40002
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131]
+}
+
+[sub_resource type="Animation" id="Animation_athql"]
+resource_name = "walk_back"
+length = 0.666678
+loop_mode = 1
+step = 0.111111
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.111111, 0.222222, 0.333333, 0.444444, 0.555556),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [36, 37, 38, 39, 40, 41]
+}
+
+[sub_resource type="Animation" id="Animation_iaie4"]
+resource_name = "walk_front"
+length = 0.666678
+loop_mode = 1
+step = 0.111111
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.111111, 0.222222, 0.333333, 0.444444, 0.555556),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [84, 85, 86, 87, 88, 89]
+}
+
+[sub_resource type="Animation" id="Animation_ib08w"]
+resource_name = "walk_side"
+length = 0.666678
+loop_mode = 1
+step = 0.111111
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.111111, 0.222222, 0.333333, 0.444444, 0.555556),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [132, 133, 134, 135, 136, 137]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qhrah"]
+_data = {
+"RESET": SubResource("Animation_gyn2p"),
+"attack_back": SubResource("Animation_0acgw"),
+"attack_front": SubResource("Animation_3q4ih"),
+"attack_side": SubResource("Animation_jg3sv"),
+"big_attack_back": SubResource("Animation_v63j7"),
+"big_attack_front": SubResource("Animation_kvj3q"),
+"big_attack_side": SubResource("Animation_dcf5e"),
+"death": SubResource("Animation_eogu2"),
+"hit_back": SubResource("Animation_uhrnu"),
+"hit_front": SubResource("Animation_t6ndl"),
+"hit_side": SubResource("Animation_ula07"),
+"idle_back": SubResource("Animation_vtvqd"),
+"idle_front": SubResource("Animation_8c6aj"),
+"idle_side": SubResource("Animation_bal1y"),
+"walk_back": SubResource("Animation_athql"),
+"walk_front": SubResource("Animation_iaie4"),
+"walk_side": SubResource("Animation_ib08w")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7kcr8"]
+radius = 3.0
+height = 8.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vqg54"]
+radius = 3.0
+height = 8.0
+
+[sub_resource type="Animation" id="Animation_i6b8j"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_rqpmc"]
+resource_name = "default"
+length = 1.60001
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qc7kb"]
+_data = {
+"RESET": SubResource("Animation_i6b8j"),
+"default": SubResource("Animation_rqpmc")
+}
+
+[sub_resource type="Animation" id="Animation_ab4xo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [55]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_an1pq"]
+resource_name = "default"
+length = 1.10001
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ntofq"]
+_data = {
+"RESET": SubResource("Animation_ab4xo"),
+"default": SubResource("Animation_an1pq")
+}
+
+[node name="player" type="CharacterBody2D" groups=["Player"]]
+y_sort_enabled = true
+collision_layer = 258
+collision_mask = 209
+motion_mode = 1
+wall_min_slide_angle = 0.0
+platform_on_leave = 2
+safe_margin = 0.12
+script = ExtResource("1_80dj5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -12)
+texture = ExtResource("2_en3d1")
+hframes = 12
+vframes = 16
+frame = 72
+
+[node name="Hitbox" type="Area2D" parent="Sprite2D" node_paths=PackedStringArray("hitbox_owner")]
+position = Vector2(0, 8)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("3_fl1gd")
+hitbox_owner = NodePath("../..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Hitbox"]
+position = Vector2(0, -18)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_vkf8w")
+disabled = true
+debug_color = Color(0, 0, 0.701961, 0.419608)
+
+[node name="hurtbox" type="Area2D" parent="Sprite2D"]
+position = Vector2(0, 8)
+collision_layer = 0
+collision_mask = 72
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/hurtbox"]
+position = Vector2(0, -1)
+shape = SubResource("CapsuleShape2D_nsqgr")
+debug_color = Color(1, 0, 0.701961, 0.419608)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qhrah")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, -4)
+shape = SubResource("CapsuleShape2D_7kcr8")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3, 3)
+limit_left = -5085
+limit_right = -1140
+position_smoothing_speed = 1.0
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+
+[node name="hand" type="Marker2D" parent="."]
+visible = false
+position = Vector2(0, -9)
+
+[node name="laser" parent="." instance=ExtResource("6_ym5cx")]
+position = Vector2(0, -9)
+
+[node name="dash" type="Node2D" parent="."]
+script = ExtResource("5_tn2bh")
+
+[node name="duration" type="Timer" parent="dash"]
+one_shot = true
+
+[node name="ghost_timer" type="Timer" parent="dash"]
+wait_time = 0.05
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="healthbar" parent="CanvasLayer" instance=ExtResource("7_rnfd2")]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 35.0
+offset_top = -68.0
+offset_right = 99.0
+offset_bottom = -63.0
+grow_vertical = 0
+scale = Vector2(3, 3)
+
+[node name="h_potion" type="Sprite2D" parent="CanvasLayer/healthbar"]
+position = Vector2(32.5, 8.5)
+texture = ExtResource("7_dxgfr")
+vframes = 4
+frame = 3
+
+[node name="m_potion" type="Sprite2D" parent="CanvasLayer/healthbar"]
+position = Vector2(32.5, 8.5)
+texture = ExtResource("8_hfiri")
+vframes = 3
+frame = 2
+
+[node name="accept_label" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Panel" type="Panel" parent="CanvasLayer/accept_label"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -45.0
+offset_top = -73.0
+offset_right = 71.0
+offset_bottom = -73.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/accept_label"]
+position = Vector2(-13, -55)
+texture = ExtResource("9_ds3hg")
+hframes = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/accept_label"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 13.0
+offset_top = -74.0
+offset_right = 54.0
+offset_bottom = -74.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
+text = "Accept"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="damage_label" type="Marker2D" parent="."]
+visible = false
+position = Vector2(-4, -31)
+
+[node name="head" type="StaticBody2D" parent="."]
+visible = false
+collision_layer = 32
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="head"]
+position = Vector2(0, -13)
+shape = SubResource("CapsuleShape2D_vqg54")
+
+[node name="poison" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -22)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("7_br7r5")
+hframes = 16
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="poison"]
+libraries = {
+"": SubResource("AnimationLibrary_qc7kb")
+}
+
+[node name="poison_timer" type="Timer" parent="poison"]
+wait_time = 5.0
+
+[node name="damage" type="Timer" parent="poison"]
+wait_time = 0.75
+
+[node name="slowdown" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, 1)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("8_vpgya")
+hframes = 11
+vframes = 9
+frame = 55
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="slowdown"]
+libraries = {
+"": SubResource("AnimationLibrary_ntofq")
+}
+
+[node name="slowdown_timer" type="Timer" parent="slowdown"]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="area_entered" from="Sprite2D/hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="area_exited" from="Sprite2D/hurtbox" to="." method="_on_hurtbox_area_exited"]
+[connection signal="pulse_signal" from="laser" to="." method="_on_laser_pulse_signal"]
+[connection signal="timeout" from="dash/duration" to="dash" method="_on_duration_timeout"]
+[connection signal="timeout" from="dash/ghost_timer" to="dash" method="_on_ghost_timer_timeout"]
+[connection signal="timeout" from="poison/poison_timer" to="." method="_on_poison_timer_timeout"]
+[connection signal="timeout" from="poison/damage" to="." method="_on_damage_timeout"]
+[connection signal="timeout" from="slowdown/slowdown_timer" to="." method="_on_slowdown_timer_timeout"]

@@ -1,0 +1,174 @@
+[gd_scene load_steps=8 format=3 uid="uid://cgss624o6rnjd"]
+
+[sub_resource type="GDScript" id="GDScript_qtjbc"]
+script/source = "extends Control
+
+@onready var resume_button: Button = $Panel/VBoxContainer/resume_button
+
+func _on_resume_button_pressed() -> void:
+	get_parent().visible = false
+	get_tree().paused = false
+
+
+func _on_exit_button_pressed() -> void:
+	get_parent().visible = false
+	get_tree().paused = false
+	get_tree().change_scene_to_file(\"res://scenes/main_menu.tscn\")
+	#get_tree().quit()
+"
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dykhu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_op0mm"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0.65249, 0.64452, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6c8c1"]
+bg_color = Color(0.813258, 0.813258, 0.813258, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_color = Color(0, 0, 0, 0.356863)
+shadow_size = 5
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u7vau"]
+bg_color = Color(0.537011, 0.537011, 0.537011, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_color = Color(0, 0, 0, 0.356863)
+shadow_size = 5
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fdq4d"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_color = Color(0, 0, 0, 0.356863)
+shadow_size = 5
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="GDScript" id="GDScript_12r0j"]
+script/source = "extends Button
+
+func _ready() -> void:
+	grab_focus()
+"
+
+[node name="pause_menu" type="Control"]
+process_mode = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_qtjbc")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -136.0
+offset_top = -140.0
+offset_right = 136.0
+offset_bottom = 140.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_dykhu")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -124.0
+offset_right = 120.0
+offset_bottom = 108.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Paused"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="resume_button" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+focus_neighbor_top = NodePath("../main_menu_button")
+focus_neighbor_bottom = NodePath("../options_button")
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
+theme_override_styles/focus = SubResource("StyleBoxFlat_op0mm")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6c8c1")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_u7vau")
+theme_override_styles/normal = SubResource("StyleBoxFlat_fdq4d")
+text = "Resume Game"
+script = SubResource("GDScript_12r0j")
+
+[node name="options_button" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+focus_neighbor_top = NodePath("../resume_button")
+focus_neighbor_bottom = NodePath("../main_menu_button")
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
+theme_override_styles/focus = SubResource("StyleBoxFlat_op0mm")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6c8c1")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_u7vau")
+theme_override_styles/normal = SubResource("StyleBoxFlat_fdq4d")
+text = "Options
+"
+
+[node name="main_menu_button" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+focus_neighbor_top = NodePath("../options_button")
+focus_neighbor_bottom = NodePath("../resume_button")
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
+theme_override_styles/focus = SubResource("StyleBoxFlat_op0mm")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6c8c1")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_u7vau")
+theme_override_styles/normal = SubResource("StyleBoxFlat_fdq4d")
+text = "Main Menu"
+
+[connection signal="pressed" from="Panel/VBoxContainer/resume_button" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/main_menu_button" to="." method="_on_exit_button_pressed"]

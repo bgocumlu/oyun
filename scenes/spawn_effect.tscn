@@ -1,0 +1,140 @@
+[gd_scene load_steps=21 format=3 uid="uid://bigfjk5yy0ice"]
+
+[ext_resource type="Texture2D" uid="uid://e6e06x7jwif4" path="res://assets/lightning/Lightning_2_512-sheet.png" id="1_x5ma7"]
+[ext_resource type="Texture2D" uid="uid://dx5q2dp6bfy06" path="res://assets/lightning/Lightning_4_512-sheet.png" id="2_0jx3p"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ejr1d"]
+atlas = ExtResource("1_x5ma7")
+region = Rect2(0, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ssev5"]
+atlas = ExtResource("1_x5ma7")
+region = Rect2(512, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4p0fq"]
+atlas = ExtResource("1_x5ma7")
+region = Rect2(1024, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mjraw"]
+atlas = ExtResource("1_x5ma7")
+region = Rect2(1536, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4je4c"]
+atlas = ExtResource("1_x5ma7")
+region = Rect2(0, 512, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yu21q"]
+atlas = ExtResource("1_x5ma7")
+region = Rect2(512, 512, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ll1t"]
+atlas = ExtResource("1_x5ma7")
+region = Rect2(1024, 512, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d7opl"]
+atlas = ExtResource("1_x5ma7")
+region = Rect2(1536, 512, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_omph8"]
+atlas = ExtResource("1_x5ma7")
+region = Rect2(0, 1024, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w08ac"]
+atlas = ExtResource("1_x5ma7")
+region = Rect2(512, 1024, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lier7"]
+atlas = ExtResource("1_x5ma7")
+region = Rect2(1024, 1024, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fk3sx"]
+atlas = ExtResource("1_x5ma7")
+region = Rect2(1536, 1024, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8vptu"]
+atlas = ExtResource("1_x5ma7")
+region = Rect2(0, 1536, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bbq23"]
+atlas = ExtResource("1_x5ma7")
+region = Rect2(512, 1536, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cafmd"]
+atlas = ExtResource("1_x5ma7")
+region = Rect2(1024, 1536, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d2isv"]
+atlas = ExtResource("1_x5ma7")
+region = Rect2(1536, 1536, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sgr18"]
+atlas = ExtResource("2_0jx3p")
+region = Rect2(1152, 1152, 384, 384)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d44xv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ejr1d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ssev5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4p0fq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mjraw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4je4c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yu21q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ll1t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d7opl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_omph8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w08ac")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lier7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fk3sx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8vptu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bbq23")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cafmd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d2isv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sgr18")
+}],
+"loop": false,
+"name": &"default",
+"speed": 12.0
+}]
+
+[node name="spawn_effect" type="AnimatedSprite2D"]
+modulate = Color(0.418835, 0.013862, 0.359779, 1)
+position = Vector2(0, -12)
+scale = Vector2(-0.209854, -0.1)
+sprite_frames = SubResource("SpriteFrames_d44xv")
+autoplay = "default"
+frame = 16
+frame_progress = 1.0

@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://sa1xuhveojdt"]
+
+[ext_resource type="Texture2D" uid="uid://bpja6enj7hw3m" path="res://assets/icon.svg" id="1_jutrs"]
+[ext_resource type="Script" path="res://scripts/dash_ghost.gd" id="1_nr2dt"]
+
+[node name="dash_ghost" type="Sprite2D"]
+y_sort_enabled = true
+texture = ExtResource("1_jutrs")
+script = ExtResource("1_nr2dt")
