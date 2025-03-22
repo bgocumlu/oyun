@@ -1,2 +1,2 @@
 # oyun
-play it in the browser: https://berkay-g.github.io/oyun/
+play it in the browser: https://bgocumlu.github.io/oyun/
